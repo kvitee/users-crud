@@ -10,9 +10,9 @@ class Storage {
    * @param {string} name - Name of new user.
    * @param {number} age - Age of new user.
    * 
-   * @return {User} Created user.
+   * @return {Promise.<User>} Promise resolved with the created user.
    */
-  createUser({name, age}) {
+  async createUser({name, age}) {
     const user = {
       id: this.count++,
       name: name ?? null,
@@ -27,9 +27,9 @@ class Storage {
   /**
    * Get all stored users.
    *
-   * @return {User[]} List of users.
+   * @return {Promise.<User[]>} Promise resolved with the list of stored users.
    */
-  getUsers() {
+  async getUsers() {
     return this.data;
   }
 
@@ -38,10 +38,10 @@ class Storage {
    *
    * @param {number} id - Id of user to get.
    *
-   * @return {User} User with the given id or `null`
-   *                  if it is not found.
+   * @return {Promise.<User>} Promise resolved with the user with the given id
+   *         or `null` if it is not found.
    */
-  getUser(id) {
+  async getUser(id) {
     return this.data.find(user => user.id === id) ?? null;
   }
 
@@ -52,10 +52,10 @@ class Storage {
    * @param {string} name - New name of user.
    * @param {number} age - New age of user.
    *
-   * @return {User} Updated user or `null` if user with
-   *         the given id is not found.
+   * @return {Promise.<User>} Promise resolved with the updated user
+   *         or `null` if user with the given id is not found.
    */
-  updateUser({id, name, age}) {
+  async updateUser({id, name, age}) {
     const user = this.getUser(id);
 
     if (user === null) {
@@ -78,9 +78,10 @@ class Storage {
    *
    * @param {number} id - Id of user to delete.
    *
-   * @return {User} Deleted user or `null` if nothing was deleted.
+   * @return {Promise.<User>} Promise resolved with the deleted user
+   *         or `null` if nothing was deleted.
    */
-  deleteUser(id) {
+  async deleteUser(id) {
     const index = this.data.findIndex(user => user.id === id);
 
     if (index === -1) {

@@ -1,4 +1,5 @@
 import { userRouteHandler } from "./userRoutes/router.js";
+import { routeNotFound } from "./routeNotFound.js"
 
 
 async function routeHandler(request, response) {
@@ -7,13 +8,7 @@ async function routeHandler(request, response) {
   if (request.url.startsWith("/users")) {
     await userRouteHandler(request, response);
   } else {
-    response
-      .status(404)
-      .end(
-        JSON.stringify({
-          error: "Route not Found"
-        })
-      );
+    await routeNotFound(request, response);
   }
 }
 

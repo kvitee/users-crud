@@ -56,7 +56,7 @@ class Storage {
    *         or `null` if user with the given id is not found.
    */
   async updateUser(id, {name, age}) {
-    const user = this.getUser(id);
+    const user = await this.getUser(id);
 
     if (user === null) {
       return null;

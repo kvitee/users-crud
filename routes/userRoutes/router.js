@@ -1,6 +1,7 @@
 import { getUsers } from "./getUsers.js";
 import { getUser } from "./getUser.js";
 import { createUser } from "./createUser.js";
+import { updateUser } from "./updateUser.js";
 
 import { RouteNotFoundError } from "../exceptions/RouteNotFound.js";
 
@@ -18,6 +19,10 @@ async function userRouteHandler(request, response) {
 
     case "POST":
       await createUser(request, response);
+      break;
+
+    case "PUT":
+      await updateUser(request, response);
       break;
 
     default:

@@ -1,5 +1,5 @@
-import { parseRequestBody } from "../../utils/requestBodyParser.js";
 import { storage } from "../../storage/arrayStorage.js";
+import { parseRequestBody } from "../../utils/requestBodyParser.js";
 
 
 async function createUser(request, response) {

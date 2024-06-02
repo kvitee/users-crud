@@ -1,7 +1,7 @@
 import { getUsers } from "./getUsers.js";
 import { createUser } from "./createUser.js";
 
-import { routeNotFound } from "../routeNotFound.js";
+import { RouteNotFoundError } from "../exceptions/RouteNotFound.js";
 
 
 async function userRouteHandler(request, response) {
@@ -10,7 +10,7 @@ async function userRouteHandler(request, response) {
   } else if (request.method === "POST") {
     await createUser(request, response);
   } else {
-    await routeNotFound(request, response);
+    throw new RouteNotFoundError(request.url, request.method);
   }
 }
 

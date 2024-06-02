@@ -55,7 +55,7 @@ class Storage {
    * @return {Promise.<User>} Promise resolved with the updated user
    *         or `null` if user with the given id is not found.
    */
-  async updateUser({id, name, age}) {
+  async updateUser(id, {name, age}) {
     const user = this.getUser(id);
 
     if (user === null) {

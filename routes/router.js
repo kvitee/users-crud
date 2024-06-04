@@ -1,6 +1,7 @@
 import { userRouteHandler } from "./userRoutes/router.js";
 
 import { RouteNotFoundError } from "../exceptions/RouteNotFound.js";
+import { PropertyRequiredError } from "../exceptions/PropertyRequired.js";
 
 
 async function routeHandler(request, response) {
@@ -16,6 +17,12 @@ async function routeHandler(request, response) {
     if (error instanceof RouteNotFoundError) {
       response
         .writeHead(404, "Route Not Found")
+        .end();
+
+      console.error(error);
+    } else if (error instanceof PropertyRequiredError) {
+      response
+        .writeHead(422, "Property required")
         .end();
 
       console.error(error);

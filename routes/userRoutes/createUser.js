@@ -1,4 +1,4 @@
-import { storage } from "../../storage/arrayStorage.js";
+import { storage } from "../../storage/dbStorage.js";
 import { parseRequestBody } from "../../utils/requestBodyParser.js";
 
 import { RouteNotFoundError } from "../../exceptions/RouteNotFound.js";

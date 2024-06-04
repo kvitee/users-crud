@@ -1,4 +1,4 @@
-import { storage } from "../../storage/arrayStorage.js";
+import { storage } from "../../storage/dbStorage.js";
 
 
 async function getUsers(request, response) {

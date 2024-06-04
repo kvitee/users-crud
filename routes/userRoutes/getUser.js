@@ -10,13 +10,12 @@ async function getUser(request, response) {
     throw new RouteNotFoundError(request.url, request.method);
   }
 
+  const userId = +match[1];
+  const user = await storage.getUser(userId);
+
   response
     .writeHead(200)
-    .end(
-      JSON.stringify(
-        await storage.getUser(+match[1])
-      )
-    );
+    .end(JSON.stringify(user));
 }
 
 export { getUser };

@@ -10,13 +10,12 @@ async function deleteUser(request, response) {
     throw new RouteNotFoundError(request.url, request.method);
   }
 
+  const userId = +match[1];
+  const deletedUser = await storage.deleteUser(userId);
+
   response
     .writeHead(200)
-    .end(
-      JSON.stringify(
-        await storage.deleteUser(+match[1])
-      )
-    );
+    .end(JSON.stringify(deletedUser));
 }
 
 export { deleteUser };

@@ -4,8 +4,6 @@ import { createUser } from "./createUser.js";
 import { updateUser } from "./updateUser.js";
 import { deleteUser } from "./deleteUser.js";
 
-import { userNotFound } from "./userNotFound.js";
-
 import { RouteNotFoundError } from "../exceptions/RouteNotFound.js";
 import { UserNotExistError } from "../../exceptions/UserNotExist.js";
 
@@ -40,7 +38,10 @@ async function userRouteHandler(request, response) {
     }
   } catch (error) {
     if (error instanceof UserNotExistError) {
-      await userNotFound(request, response);
+      response
+        .writeHead(404, "User Not Found")
+        .end();
+
       console.error(error);
     } else {
       throw error;

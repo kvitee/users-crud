@@ -1,5 +1,4 @@
 import { userRouteHandler } from "./userRoutes/router.js";
-import { routeNotFound } from "./routeNotFound.js"
 
 import { RouteNotFoundError } from "./exceptions/RouteNotFound.js";
 
@@ -15,7 +14,10 @@ async function routeHandler(request, response) {
     }
   } catch (error) {
     if (error instanceof RouteNotFoundError) {
-      await routeNotFound(request, response);
+      response
+        .writeHead(404, "Route Not Found")
+        .end();
+
       console.error(error);
     } else {
       throw error;

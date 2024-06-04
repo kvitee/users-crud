@@ -1,3 +1,6 @@
+import { UserNotExistError } from "../exceptions/UserNotExist.js";
+
+
 class Storage {
   constructor() {
     this.data = [];
@@ -38,11 +41,19 @@ class Storage {
    *
    * @param {number} id - Id of user to get.
    *
-   * @return {Promise.<User>} Promise resolved with the user with the given id
-   *         or `null` if it is not found.
+   * @return {Promise.<User>} Promise resolved with the user with the given id.
+   *
+   * @throws {UserNotExistError} Throws an error
+   *         if user with the given id does not exist.
    */
   async getUser(id) {
-    return this.data.find(user => user.id === id) ?? null;
+    const user = this.data.find(user => user.id === id);
+
+    if (user === undefined) {
+      throw new UserNotExistError(id);
+    }
+
+    return user;
   }
 
   /**
@@ -52,15 +63,13 @@ class Storage {
    * @param {string} name - New name of user.
    * @param {number} age - New age of user.
    *
-   * @return {Promise.<User>} Promise resolved with the updated user
-   *         or `null` if user with the given id is not found.
+   * @return {Promise.<User>} Promise resolved with the updated user.
+   *
+   * @throws {UserNotExistError} Throws an error
+   *         if user with the given id does not exist.
    */
   async updateUser(id, {name, age}) {
     const user = await this.getUser(id);
-
-    if (user === null) {
-      return null;
-    }
 
     if (name !== undefined) {
       user.name = name;
@@ -78,14 +87,16 @@ class Storage {
    *
    * @param {number} id - Id of user to delete.
    *
-   * @return {Promise.<User>} Promise resolved with the deleted user
-   *         or `null` if nothing was deleted.
+   * @return {Promise.<User>} Promise resolved with the deleted user.
+   *
+   * @throws {UserNotExistError} Throws an error
+   *         if user with the given id does not exist.
    */
   async deleteUser(id) {
     const index = this.data.findIndex(user => user.id === id);
 
     if (index === -1) {
-      return null;
+      throw new UserNotExistError(id);
     }
 
     return this.data.splice(index, 1)[0];

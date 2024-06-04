@@ -1,6 +1,6 @@
 import { userRouteHandler } from "./userRoutes/router.js";
 
-import { RouteNotFoundError } from "./exceptions/RouteNotFound.js";
+import { RouteNotFoundError } from "../exceptions/RouteNotFound.js";
 
 
 async function routeHandler(request, response) {

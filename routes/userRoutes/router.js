@@ -4,7 +4,7 @@ import { createUser } from "./createUser.js";
 import { updateUser } from "./updateUser.js";
 import { deleteUser } from "./deleteUser.js";
 
-import { RouteNotFoundError } from "../exceptions/RouteNotFound.js";
+import { RouteNotFoundError } from "../../exceptions/RouteNotFound.js";
 import { UserNotExistError } from "../../exceptions/UserNotExist.js";
 
 

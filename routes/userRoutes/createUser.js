@@ -1,7 +1,7 @@
 import { storage } from "../../storage/arrayStorage.js";
 import { parseRequestBody } from "../../utils/requestBodyParser.js";
 
-import { RouteNotFoundError } from "../exceptions/RouteNotFound.js";
+import { RouteNotFoundError } from "../../exceptions/RouteNotFound.js";
 
 
 async function createUser(request, response) {

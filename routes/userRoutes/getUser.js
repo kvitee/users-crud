@@ -1,6 +1,6 @@
 import { storage } from "../../storage/arrayStorage.js";
 
-import { RouteNotFoundError } from "../exceptions/RouteNotFound.js";
+import { RouteNotFoundError } from "../../exceptions/RouteNotFound.js";
 
 
 async function getUser(request, response) {

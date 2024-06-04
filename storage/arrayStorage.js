@@ -1,4 +1,5 @@
 import { UserNotExistError } from "../exceptions/UserNotExist.js";
+import { PropertyRequiredError } from "../exceptions/PropertyRequired.js";
 
 
 class Storage {
@@ -14,12 +15,23 @@ class Storage {
    * @param {number} age - Age of new user.
    * 
    * @return {Promise.<User>} Promise resolved with the created user.
+   *
+   * @throws {PropertyRequiredError} Both `name` and `age`
+   *         properties must not be null-value.
    */
   async createUser({name, age}) {
+    if (!name) {
+      throw new PropertyRequiredError("name");
+    }
+
+    if (!age) {
+      throw new PropertyRequiredError("age");
+    }
+
     const user = {
       id: this.count++,
-      name: name ?? null,
-      age: age ?? null
+      name,
+      age
     };
 
     this.data.push(user);
@@ -67,17 +79,22 @@ class Storage {
    *
    * @throws {UserNotExistError} Throws an error
    *         if user with the given id does not exist.
+   * @throws {PropertyRequiredError} Both `name` and `age`
+   *         properties must not be null-value.
    */
   async updateUser(id, {name, age}) {
     const user = await this.getUser(id);
 
-    if (name !== undefined) {
-      user.name = name;
+    if (!name) {
+      throw new PropertyRequiredError("name");
     }
 
-    if (age !== undefined) {
-      user.age = age;
+    if (!age) {
+      throw new PropertyRequiredError("age");
     }
+
+    user.name = name;
+    user.age = age;
 
     return user;
   }

@@ -7,10 +7,10 @@ async function parseRequestBody(request) {
     });
 
     request.on("end", () => {
+      const body = Buffer.concat(chunks).toString();
+
       resolve(
-        JSON.parse(
-          Buffer.concat(chunks).toString()
-        )
+        JSON.parse(body || "{}")
       );
     });
   });

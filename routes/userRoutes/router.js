@@ -38,14 +38,16 @@ async function userRouteHandler(request, response) {
     }
   } catch (error) {
     if (error instanceof UserNotExistError) {
-      response
-        .writeHead(404, "User Not Found")
-        .end();
-
-      console.error(error);
+      response.writeHead(404, "User Not Found")
     } else {
       throw error;
     }
+
+    response.end(
+      JSON.stringify({ error })
+    );
+  } finally {
+    response.end();
   }
 }
 

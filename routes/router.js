@@ -15,20 +15,18 @@ async function routeHandler(request, response) {
     }
   } catch (error) {
     if (error instanceof RouteNotFoundError) {
-      response
-        .writeHead(404, "Route Not Found")
-        .end();
-
-      console.error(error);
+      response.writeHead(404, "Route Not Found");
     } else if (error instanceof PropertyRequiredError) {
-      response
-        .writeHead(422, "Property required")
-        .end();
-
-      console.error(error);
+      response.writeHead(422, "Property Required");
     } else {
       throw error;
     }
+
+    response.end(
+      JSON.stringify({ error })
+    );
+  } finally {
+    response.end();
   }
 }
 

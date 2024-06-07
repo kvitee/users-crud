@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node --env-file=.env server.js"
+    "start": "node --env-file=.env server.js",
+    "initdb": "node --env-file=.env config/dbSchema.js"
   },
   "author": "kvitee <kvitee41@gmail.com>",
   "engines": {

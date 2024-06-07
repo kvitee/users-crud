@@ -11,8 +11,8 @@
   },
   "author": "kvitee <kvitee41@gmail.com>",
   "engines": {
-    "node": ">=21.0.0",
-    "npm": ">=10.0.0"
+    "node": ">=20.14.0",
+    "npm": ">=10.7.0"
   },
   "dependencies": {
     "pg": "^8.11.5"

@@ -46,8 +46,6 @@ async function userRouteHandler(request, response) {
     response.end(
       JSON.stringify({ error })
     );
-  } finally {
-    response.end();
   }
 }
 

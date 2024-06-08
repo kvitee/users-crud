@@ -19,6 +19,8 @@ async function routeHandler(request, response) {
     } else if (error instanceof PropertyRequiredError) {
       response.writeHead(422, "Property Required");
     } else {
+      response.writeHead(500);
+
       throw error;
     }
 

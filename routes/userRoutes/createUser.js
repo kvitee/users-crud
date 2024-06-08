@@ -12,11 +12,11 @@ async function createUser(request, response) {
   }
 
   const body = await parseRequestBody(request);
-  const createdUser = await storage.createUser(body);
+  const userId = await storage.createUser(body);
 
   response
     .writeHead(200)
-    .end(JSON.stringify(createdUser));
+    .end(JSON.stringify({ id: userId }));
 }
 
 export { createUser };

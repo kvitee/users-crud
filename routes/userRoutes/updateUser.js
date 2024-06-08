@@ -12,13 +12,13 @@ async function updateUser(request, response) {
   }
 
   const userId = +match[1];
-
   const body = await parseRequestBody(request);
-  const updatedUser = await storage.updateUser(userId, body);
+
+  await storage.updateUser(userId, body);
 
   response
-    .writeHead(200)
-    .end(JSON.stringify(updatedUser));
+    .writeHead(204, "User Updated")
+    .end();
 }
 
 export { updateUser };

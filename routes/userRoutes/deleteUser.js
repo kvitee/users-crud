@@ -11,11 +11,12 @@ async function deleteUser(request, response) {
   }
 
   const userId = +match[1];
-  const deletedUser = await storage.deleteUser(userId);
+
+  await storage.deleteUser(userId);
 
   response
-    .writeHead(200)
-    .end(JSON.stringify(deletedUser));
+    .writeHead(204, "User Deleted")
+    .end();
 }
 
 export { deleteUser };

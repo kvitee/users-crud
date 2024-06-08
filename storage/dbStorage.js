@@ -27,7 +27,7 @@ class Storage {
    * @param {string} name - Name of new user.
    * @param {number} age - Age of new user.
    * 
-   * @return {Promise.<User>} Promise resolved with the created user.
+   * @return {Promise.<number>} Promise resolved with the id of created user.
    *
    * @throws {PropertyRequiredError} Both `name` and `age`
    *         properties must not be null-value.
@@ -46,11 +46,7 @@ class Storage {
       [name, age]
     );
 
-    return {
-      id: result.rows[0].id,
-      name,
-      age
-    };
+    return result.rows[0].id;
   }
 
   /**
@@ -96,7 +92,7 @@ class Storage {
    * @param {string} name - New name of user.
    * @param {number} age - New age of user.
    *
-   * @return {Promise.<User>} Promise resolved with the updated user.
+   * @return {Promise} Promise resolved if user was updated successfully.
    *
    * @throws {UserNotExistError} Throws an error
    *         if user with the given id does not exist.
@@ -120,8 +116,6 @@ class Storage {
     if (result.rowCount === 0) {
       throw new UserNotExistError(id);
     }
-
-    return { id, name, age };
   }
 
   /**
@@ -129,22 +123,20 @@ class Storage {
    *
    * @param {number} id - Id of user to delete.
    *
-   * @return {Promise.<User>} Promise resolved with the deleted user.
+   * @return {Promise} Promise resolved if user was deleted successfully.
    *
    * @throws {UserNotExistError} Throws an error
    *         if user with the given id does not exist.
    */
   async deleteUser(id) {
     const result = await this.client.query(
-      "DELETE FROM users WHERE id = $1 RETURNING *;",
+      "DELETE FROM users WHERE id = $1;",
       [id]
     );
 
     if (result.rowCount === 0) {
       throw new UserNotExistError(id);
     }
-
-    return result.rows[0];
   }
 }
 

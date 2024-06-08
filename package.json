@@ -1,6 +1,6 @@
 {
   "name": "users-crud",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "",
   "main": "server.js",
   "type": "module",
@@ -10,6 +10,7 @@
     "initdb": "node --env-file=.env config/dbSchema.js"
   },
   "author": "kvitee <kvitee41@gmail.com>",
+  "license": "MIT",
   "engines": {
     "node": ">=20.14.0",
     "npm": ">=10.7.0"
